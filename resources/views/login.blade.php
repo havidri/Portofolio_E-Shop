@@ -84,9 +84,9 @@
 				<div class="col-sm-4 col-sm-offset-1">
 					<div class="login-form"><!--login form-->
 						<h2>Login to your account</h2>
-						<form action="#">
-							<input type="text" placeholder="Name" />
-							<input type="email" placeholder="Email Address" />
+						<form action="/Singin" method="POST">
+							<input type="email" placeholder="Email Address" name="email" />
+							<input type="password" placeholder="Password" name="password"/>
 							<span>
 								<input type="checkbox" class="checkbox"> 
 								Keep me signed in
@@ -126,12 +126,13 @@
 		</div>
 		
 	</footer><!--/Footer-->
-  
+
     <script src="Template/js/jquery.js"></script>
 	<script src="Template/js/price-range.js"></script>
     <script src="Template/js/jquery.scrollUp.min.js"></script>
 	<script src="Template/js/bootstrap.min.js"></script>
     <script src="Template/js/jquery.prettyPhoto.js"></script>
     <script src="Template/js/main.js"></script>
+
 </body>
 </html>

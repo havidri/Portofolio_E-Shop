@@ -27,6 +27,11 @@
 <body>
 	<header id="header"><!--header-->
 		
+		<?php
+		use Illuminate\Support\Facades\Session;
+		$id = Session::get('id_user');
+		?>
+
 		<div class="header-middle"><!--header-middle-->
 			<div class="container">
 				<div class="row">
@@ -168,22 +173,26 @@
 											<img src="/data_file/{{$product->image}}" alt="" />
 											<h2>Rp. {{$product->price}}</h2>
 											<p>{{$product->product_name}}</p>
-											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+											<?php if($id != null) {?>
+												<button data-toggle="modal" data-target="#myModal"  data-id="{{ $product->id }}" class="btn btn-default add-to-cart total"><i class="fa fa-shopping-cart"></i>Add to cart</button> 
+											<?php } else {}?>
 										</div>
 										<div class="product-overlay">
 											<div class="overlay-content">
 												<h2>Rp. {{$product->price}}</h2>
 												<p>{{$product->product_name}}</p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+												<?php if($id != null) {?>
+													<button data-toggle="modal" data-target="#myModal"  data-id="{{ $product->id }}" class="btn btn-default add-to-cart total"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+											<?php } else {}?>
 											</div>
 										</div>
 								</div>
-								<div class="choose">
+								<!-- <div class="choose">
 									<ul class="nav nav-pills nav-justified">
 										<li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
 										<li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
 									</ul>
-								</div>
+								</div> -->
 							</div>
 						</div>
 						@endforeach
@@ -206,6 +215,33 @@
 
 	</footer><!--/Footer-->
 	
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" role="dialog">
+           <div class="modal-dialog">
+             <form action="/AddCart" method="post">
+             <!-- Modal content-->
+             <div class="modal-content">
+               <div class="modal-header">
+                 <button type="button" class="close" data-dismiss="modal">&times;</button>
+                 <h4 class="modal-title">Masukan Jumlah</h4>
+               </div>
+               <div class="modal-body">
+                 <input type="hidden" id="id_product" class="id_product" name="id_product" value="3487">
+                 <div class="form-group">
+                   <label for="exampleInputEmail1">Jumlah Beli</label>
+                   <input type="text" class="form-control " id="total" name="total" placeholder="Jumlah Beli">
+                 </div>
+               </div>
+               <div class="modal-footer">
+                 <button type="submit" class="btn btn-default">Beli</button>
+                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+               </div>
+             </div>
+           </form>
+           </div>
+         </div>
+
+        </div>
 
   
     <script src="Template/js/jquery.js"></script>
@@ -214,5 +250,9 @@
 	<script src="Template/js/price-range.js"></script>
     <script src="Template/js/jquery.prettyPhoto.js"></script>
     <script src="Template/js/main.js"></script>
+	<script type="text/javascript"> $(".total").click(function() {
+		$(".id_product").val($(this).attr('data-id'));});
+		</script>
+
 </body>
 </html>
